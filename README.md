@@ -61,3 +61,32 @@ https://github.com/{user}/{repo}/branches
 From here you can access the compare page or delete a branch with a click of a button.
 
 ![Compare branches not merged into master in rails/rails repo - https://github.com/rails/rails/branches](http://i.imgur.com/0FEe30z.png)
+
+
+
+AWS IoT Device SDK for Python
+=============================
+
+This document provides instructions for installing and configuringa
+the AWS IoT Device SDK for Python. It includes examples demonstrating the
+use of the SDK APIs.
+The base code was taken from [this repo](https://github.com/aws/aws-iot-device-sdk-python), and have been changed according to our requirements.
+
+
+-  [Overview](#Overview)
+-  Installation
+-  Use the SDK
+-  Key Features
+-  Examples
+-  API Documentation
+-  License
+-  Support
+
+
+- (#Overview)
+=================
+
+
+
+[This repo provides instructions for installing and configuring the AWS IoT Device SDK for Python](https://github.com/aws/aws-iot-device-sdk-python)
+
