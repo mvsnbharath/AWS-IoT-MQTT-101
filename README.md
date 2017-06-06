@@ -1,12 +1,13 @@
 ## Table of Contents
   - [GitHub](#github)
+  -[Bharath](#bharath)
     - [Ignore Whitespace](#ignore-whitespace)
     - [Adjust Tab Space](#adjust-tab-space)
     - [Commit History by Author](#commit-history-by-author)
     - [Cloning a Repository](#cloning-a-repository)
     - [Branch](#branch)
       
-
+## Bharath
 ## GitHub
 ### Ignore Whitespace
 Adding `?w=1` to any diff URL will remove any changes only in whitespace, enabling you to see only the code that has changed.
