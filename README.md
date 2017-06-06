@@ -1,6 +1,7 @@
 ## Table of Contents
   - [GitHub](#github)
-  -[Bharath](#bharath)
+  
+    -[Bharath](#bharath)
     - [Ignore Whitespace](#ignore-whitespace)
     - [Adjust Tab Space](#adjust-tab-space)
     - [Commit History by Author](#commit-history-by-author)
