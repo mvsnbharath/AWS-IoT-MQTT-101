@@ -6,20 +6,17 @@ AWS IoT Device SDK for Python
   -  [Installation](#installation)
   -  [Setting up AWS IoT components](#setting-up-aws-iot-components)
   -  [Features](#features)
-  -  [Examples](#examples)
+  -  [Implementation](#implementation)
   -  [API Documentation](#api-documentation)
   -  [References](#references)
-
 
 ## Overview
 
 This document provides instructions for installing and configuring the AWS IoT Device SDK for Python and run a PubSub program to illustrate MQTT architecture.
 
-
 ## Installation
 
 Minimum Requirements
-
 
 -  Python 2.7+ or Python 3.3+
 -  OpenSSL version 1.0.1+ (TLS version 1.2) compiled with the Python executable for
@@ -51,9 +48,7 @@ Download all the certificates:
 	iii) X.509  
 	iv) aws-iot-rootCA
 
-
 3) Link the certificate to both policy and the thing created in the registry.
-
 
 [A detailed procedure for steps 1-3 are documented here ](http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html)
 
@@ -79,7 +74,6 @@ the ``baseReconnectQuietTime``.
 If no ``configureAutoReconnectBackoffTime`` is called, the following
 default configuration for backoff timing will be performed on initialization:
 
-
     baseReconnectQuietTimeSecond = 1
     maxReconnectQuietTimeSecond = 32
     stableConnectionTimeSecond = 20
@@ -88,9 +82,7 @@ default configuration for backoff timing will be performed on initialization:
 
 If the client is temporarily offline and disconnected due to network failure, publish requests will be added to an internal queue until the number of queued-up requests reaches the size limit of the queue. 
 
-
 The following API is provided for configuration:
-
     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureOfflinePublishQueueing(queueSize, dropBehavior)
 
 After the queue is full, offline publish requests will be discarded or
@@ -163,12 +155,22 @@ interval allows the client to detect disconnects more quickly. Any QoS0
 publish requests issued after the network failure and before the
 detection of the PINGRESP loss will be lost.
 
-***DrainingFrequency***
-
 ***ConnectDisconnectTimeout***
+
+Used to configure the time in seconds to wait for a CONNACK or a disconnect to complete.
+	
+     myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)
+    
+
+``timeoutSecond`` - Time in seconds to wait for a CONNACK or a disconnect to complete.
 
 ***MQTTOperationTimeout***
 
+Used to configure the timeout in seconds for MQTT QoS 1 publish, subscribe and unsubscribe. Should be called before connect.
+
+	myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)
+    
+``timeoutSecond`` - Time in seconds to wait for a PUBACK/SUBACK/UNSUBACK.
      # AWSIoTMQTTClient connection configuration
 	
     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
@@ -177,8 +179,26 @@ detection of the PINGRESP loss will be lost.
     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
-### Examples
+### Implementation
+
+The project has 2 scripts publisher.py and subscriber.py.
+
+The publisher script publishes continuous messgaes to the topic ``temperature``.
+
+The subscriber script subscribes to the same topic which the messages are being published to.
+
+Change the following parameters accordingly in both Publisher and subscriber script:
+
+    host = "endpoint.iot.region.amazonaws.com"
+    rootCAPath = "path to your rootCA"
+    certificatePath = "path to your X.509 certificate"
+    privateKeyPath = "path to your private key"
+
+**Make Sure to use your mobile data as HP network does not give access to the port 8883 for MQTT protocol**
 ### API Documentation
+
+You can find the API documentation for the SDK [here](https://s3.amazonaws.com/aws-iot-device-sdk-python-docs/index.html)
+
 ### References
 
 The base code was taken from [this repo](https://github.com/aws/aws-iot-device-sdk-python), and have been changed according to our requirements.
