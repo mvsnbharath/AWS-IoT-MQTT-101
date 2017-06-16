@@ -1,8 +1,10 @@
 AWS IoT Device SDK for Python
 =============================
 
+---
+
 ## Table of Contents
-   - [Overview](#0verview)
+   - [Overview](#overview)
   -  [Installation](#installation)
   -  [Use the SDK](#se-the-sdk)
   -  [Key Features](#)
@@ -27,8 +29,6 @@ AWS IoT Device SDK for Python
 ### License
 ### Support
 
-
-[This repo provides instructions for installing and configuring the AWS IoT Device SDK for Python](https://github.com/aws/aws-iot-device-sdk-python)
 
 
 
