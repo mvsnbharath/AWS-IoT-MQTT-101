@@ -182,7 +182,7 @@ Used to configure the timeout in seconds for MQTT QoS 1 publish, subscribe and u
 
 ### Implementation
 
-The project has 2 scripts publisher.py and subscriber.py.
+The project has 2 scripts [publisher.py](https://github.com/mvsnbharath/AWSIoT_MQTT/blob/master/Publisher.py) and [Subscriber.py](https://github.com/mvsnbharath/AWSIoT_MQTT/blob/master/Subscriber.py).
 
 The publisher script publishes continuous messgaes to the topic ``temperature``.
 
