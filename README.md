@@ -73,9 +73,9 @@ ConnectDisconnectTimeout
 
 MQTTOperationTimeout
 
-        from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+        	from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
         
-        myAWSIoTMQTTClient = AWSIoTMQTTClient("basicPubSub1")
+        	myAWSIoTMQTTClient = AWSIoTMQTTClient("basicPubSub1")
 		AWSIoTMQTTClient connection configuration
 		myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
 		myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
@@ -87,9 +87,6 @@ MQTTOperationTimeout
 ### API Documentation
 ### License
 ### Support
-
-
-
 
 This document provides instructions for installing and configuringa
 the AWS IoT Device SDK for Python. It includes examples demonstrating the
