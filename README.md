@@ -8,8 +8,7 @@ AWS IoT Device SDK for Python
   -  [Features](#features)
   -  [Examples](#examples)
   -  [API Documentation](#api-documentation)
-  -  [License](#license)
-  -  [Support](#support)
+  -  [References](#references)
 
 
 ## Overview
@@ -53,7 +52,7 @@ Download all the certificates:
     	ii) private key 
 	iii) X.509  
 	iv) aws-iot-rootCA
-    
+
 
 3) Link the certificate to both policy and the thing created in the registry.
 
@@ -66,25 +65,12 @@ Download all the certificates:
 
 When a non-client-side disconnect occurs, the SDK will reconnect automatically. The following APIs are provided for configuration:
 
-AWSIoTMQTTClient connection configuration
-
-**configureAutoReconnectBackoffTime**(baseReconnectQuietTimeSecond, maxReconnectQuietTimeSecond, stableConnectionTimeSecond)
-
-baseReconnectQuietTimeSecond - The initial back off time to start with, in seconds. Should be less than the stableConnectionTime.
-
-maxReconnectQuietTimeSecond - The maximum back off time, in seconds.
-
-stableConnectionTimeSecond - The number of seconds for a connection to last to be considered as stable. Back off time will be reset to base once the connection is stable
-
 The auto-reconnect occurs with a progressive backoff, which follows this
 mechanism for reconnect backoff time calculation:
 
-    sup:`current` = min(2\ :sup:`n` t\ :sup:`base`, t\ :sup:`max`)
-    n^2
-    k_{n+1}
-    A = pi*r^{2}
-where t\ :sup:`current` is the current reconnect backoff time, t\ :sup:`base` is the base
-reconnect backoff time, t\ :sup:`max` is the maximum reconnect backoff time.
+This is t<sup>current</sup> = min (2<sup>n</sup> t<sup>base</sup>, t<sup>max</sup> )
+
+where t<sup>current</sup>  is the current reconnect backoff time, t<sup>base</sup> is the base reconnect backoff time, t<sup>max</sup> is the maximum reconnect backoff time.n increases itreatively.
 
 The reconnect backoff time will be doubled on disconnect and reconnect
 attempt until it reaches the preconfigured maximum reconnect backoff
@@ -102,6 +88,85 @@ default configuration for backoff timing will be performed on initialization:
 
 ***OfflinePublishQueueing***
 
+If the client is temporarily offline and disconnected due to network failure, publish requests will be added to an internal queue until the number of queued-up requests reaches the size limit of the queue. 
+
+
+The following API is provided for configuration:
+
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureOfflinePublishQueueing(queueSize, dropBehavior)
+
+After the queue is full, offline publish requests will be discarded or
+replaced according to the configuration of the drop behavior:
+
+    # Drop the oldest request in the queue
+    AWSIoTPythonSDK.MQTTLib.DROP_OLDEST = 0
+    # Drop the newest request in the queue
+    AWSIoTPythonSDK.MQTTLib.DROP_NEWEST = 1
+
+Let's say we configure the size of offlinePublishQueue to 5 and we
+have 7 incoming offline publish requests.
+
+In a ``DROP_OLDEST`` configuration:
+
+	myClient.configureOfflinePublishQueueing(5, AWSIoTPythonSDK.MQTTLib.DROP_OLDEST);
+
+The internal queue should be like this when the queue is just full:
+
+    HEAD ['pub_req1', 'pub_req2', 'pub_req3', 'pub_req4', 'pub_req5']
+
+When the 6th and the 7th publish requests are made offline, the internal
+queue will be like this:
+
+    HEAD ['pub_req3', 'pub_req4', 'pub_req5', 'pub_req6', 'pub_req7']
+
+Because the queue is already full, the oldest requests ``pub_req1`` and
+``pub_req2`` are discarded.
+
+In a ``DROP_NEWEST`` configuration:
+
+    myClient.configureOfflinePublishQueueing(5, AWSIoTPythonSDK.MQTTLib.DROP_NEWEST);
+
+The internal queue should be like this when the queue is just full:
+
+    HEAD ['pub_req1', 'pub_req2', 'pub_req3', 'pub_req4', 'pub_req5']
+
+When the 6th and the 7th publish requests are made offline, the internal
+queue will be like this:
+
+    HEAD ['pub_req1', 'pub_req2', 'pub_req3', 'pub_req4', 'pub_req5']
+
+Because the queue is already full, the newest requests ``pub_req6`` and
+``pub_req7`` are discarded.
+
+When the client is back online, connected, and resubscribed to all topics
+it has previously subscribed to, the draining starts. All requests
+in the offline publish queue will be resent at the configured draining
+rate:
+          			    
+	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureDrainingFrequency
+                                (frequencyInHz)
+                                   
+
+If no ``configOfflinePublishQueue`` or ``configureDrainingFrequency`` is
+called, the following default configuration for offline publish queueing
+and draining will be performed on the initialization:
+
+    offlinePublishQueueSize = 20
+    dropBehavior = DROP_NEWEST
+    drainingFrequency = 2Hz
+
+Before the draining process is complete, any new publish request
+within this time period will be added to the queue. Therefore, the draining rate
+should be higher than the normal publish rate to avoid an endless
+draining process after reconnect.
+
+The disconnect event is detected based on PINGRESP MQTT
+packet loss. Offline publish queueing will not be triggered until the
+disconnect event is detected. Configuring a shorter keep-alive
+interval allows the client to detect disconnects more quickly. Any QoS0
+publish requests issued after the network failure and before the
+detection of the PINGRESP loss will be lost.
+
 ***DrainingFrequency***
 
 ***ConnectDisconnectTimeout***
@@ -118,10 +183,6 @@ default configuration for backoff timing will be performed on initialization:
 
 ### Examples
 ### API Documentation
-### License
-### Support
+### References
 
-This document provides instructions for installing and configuringa
-the AWS IoT Device SDK for Python. It includes examples demonstrating the
-use of the SDK APIs.
 The base code was taken from [this repo](https://github.com/aws/aws-iot-device-sdk-python), and have been changed according to our requirements.
