@@ -55,12 +55,17 @@ Download all the certificates:
 	iv) aws-iot-rootCA
     
 
-3) Link the certificate to each thing in the registry,
+3) Link the certificate to both policy and the thing created in the registry.
 
 
 [A detailed procedure for steps 1-3 are documented here ](http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html)
 
 ### Features
+
+###### Progressive Reconnect Backoff
+
+When a non-client-side disconnect occurs, the SDK will reconnect automatically. The following APIs are provided for configuration:
+
 AWSIoTMQTTClient connection configuration
 
 AutoReconnectBackoffTime
@@ -73,15 +78,9 @@ ConnectDisconnectTimeout
 
 MQTTOperationTimeout
 
-        	from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-        
-        	myAWSIoTMQTTClient = AWSIoTMQTTClient("basicPubSub1")
-		AWSIoTMQTTClient connection configuration
-		myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
-		myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-		myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
-		myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
-		myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
+     # AWSIoTMQTTClient connection configuration
+	
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureAutoReconnectBackoffTime(1, 32, 20)	 AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureDrainingFrequency(2)  # Draining: 2 Hz	 AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureConnectDisconnectTimeout(10)  # 10 sec	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureMQTTOperationTimeout(5)  # 5 sec
 
 ### Examples
 ### API Documentation
