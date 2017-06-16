@@ -83,7 +83,8 @@ default configuration for backoff timing will be performed on initialization:
 If the client is temporarily offline and disconnected due to network failure, publish requests will be added to an internal queue until the number of queued-up requests reaches the size limit of the queue. 
 
 The following API is provided for configuration:
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureOfflinePublishQueueing(queueSize, dropBehavior)
+ 
+ 	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureOfflinePublishQueueing(queueSize, dropBehavior)
 
 After the queue is full, offline publish requests will be discarded or
 replaced according to the configuration of the drop behavior:
