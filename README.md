@@ -50,7 +50,7 @@ Install from pip
 Download all the certificates: 
     
 	i) public key  
-    ii) private key 
+    	ii) private key 
 	iii) X.509  
 	iv) aws-iot-rootCA
     
@@ -80,7 +80,10 @@ MQTTOperationTimeout
 
      # AWSIoTMQTTClient connection configuration
 	
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureAutoReconnectBackoffTime(1, 32, 20)	 AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureDrainingFrequency(2)  # Draining: 2 Hz	 AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureConnectDisconnectTimeout(10)  # 10 sec	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureMQTTOperationTimeout(5)  # 5 sec
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureAutoReconnectBackoffTime(1, 32, 20)	 	     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureDrainingFrequency(2)  # Draining: 2 Hz
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureConnectDisconnectTimeout(10)  # 10 sec
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureMQTTOperationTimeout(5)  # 5 sec
 
 ### Examples
 ### API Documentation
