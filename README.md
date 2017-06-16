@@ -46,8 +46,8 @@ Install from pip
 
 Download all the certificates: 
     
-	i) public key  
-    	ii) private key 
+	i) public key
+	ii) private key 
 	iii) X.509  
 	iv) aws-iot-rootCA
 
@@ -141,10 +141,8 @@ it has previously subscribed to, the draining starts. All requests
 in the offline publish queue will be resent at the configured draining
 rate:
           			    
-	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureDrainingFrequency
-                                (frequencyInHz)
-                                   
-
+	AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureDrainingFrequency(frequencyInHz)
+                                
 If no ``configOfflinePublishQueue`` or ``configureDrainingFrequency`` is
 called, the following default configuration for offline publish queueing
 and draining will be performed on the initialization:
