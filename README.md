@@ -13,9 +13,7 @@ AWS IoT Device SDK for Python
 
 ## Overview
 
-This document provides instructions for installing and configuring the AWS IoT Device SDK for Python. 
-
-[This repo provides instructions for installing and configuring the AWS IoT Device SDK for Python](https://github.com/aws/aws-iot-device-sdk-python)
+This document provides instructions for installing and configuring the AWS IoT Device SDK for Python and run a PubSub program to illustrate MQTT architecture.
 
 
 ## Installation
