@@ -80,10 +80,11 @@ MQTTOperationTimeout
 
      # AWSIoTMQTTClient connection configuration
 	
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureAutoReconnectBackoffTime(1, 32, 20)	 	     AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureDrainingFrequency(2)  # Draining: 2 Hz
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureConnectDisconnectTimeout(10)  # 10 sec
-    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime.configureMQTTOperationTimeout(5)  # 5 sec
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
+    AWSIoTPythonSDK.MQTTLib.AWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 ### Examples
 ### API Documentation
