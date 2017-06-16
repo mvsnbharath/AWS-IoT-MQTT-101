@@ -5,8 +5,8 @@ AWS IoT Device SDK for Python
    - [Overview](#overview)
   -  [Installation](#installation)
   -  [Setting up AWS IoT components](#setting-up-aws-iot-components)
-  -  [Key Features](#)
-  -  [Examples](#)
+  -  [Features](#features)
+  -  [Examples](#examples)
   -  [API Documentation](#api-documentation)
   -  [License](#license)
   -  [Support](#support)
@@ -35,7 +35,7 @@ Minimum Requirements
 
 Install from pip
 
-    pip install AWSIoTPythonSDK
+ 	  >>>  pip install AWSIoTPythonSDK
 
 ## Setting up AWS IoT components
 
@@ -60,8 +60,28 @@ Download all the certificates:
 
 [A detailed procedure for steps 1-3 are documented here ](http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html)
 
-### Key Features
+### Features
+AWSIoTMQTTClient connection configuration
 
+AutoReconnectBackoffTime
+
+OfflinePublishQueueing
+
+DrainingFrequency
+
+ConnectDisconnectTimeout
+
+MQTTOperationTimeout
+
+        from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+        
+        myAWSIoTMQTTClient = AWSIoTMQTTClient("basicPubSub1")
+		AWSIoTMQTTClient connection configuration
+		myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
+		myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline 		Publish queueing
+		myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
+		myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
+		myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 ### Examples
 ### API Documentation
