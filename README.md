@@ -62,21 +62,51 @@ Download all the certificates:
 
 ### Features
 
-###### Progressive Reconnect Backoff
+**Progressive Reconnect Backoff**
 
 When a non-client-side disconnect occurs, the SDK will reconnect automatically. The following APIs are provided for configuration:
 
 AWSIoTMQTTClient connection configuration
 
-AutoReconnectBackoffTime
+**configureAutoReconnectBackoffTime**(baseReconnectQuietTimeSecond, maxReconnectQuietTimeSecond, stableConnectionTimeSecond)
 
-OfflinePublishQueueing
+baseReconnectQuietTimeSecond - The initial back off time to start with, in seconds. Should be less than the stableConnectionTime.
 
-DrainingFrequency
+maxReconnectQuietTimeSecond - The maximum back off time, in seconds.
 
-ConnectDisconnectTimeout
+stableConnectionTimeSecond - The number of seconds for a connection to last to be considered as stable. Back off time will be reset to base once the connection is stable
 
-MQTTOperationTimeout
+The auto-reconnect occurs with a progressive backoff, which follows this
+mechanism for reconnect backoff time calculation:
+
+    sup:`current` = min(2\ :sup:`n` t\ :sup:`base`, t\ :sup:`max`)
+    n^2
+    k_{n+1}
+    A = pi*r^{2}
+where t\ :sup:`current` is the current reconnect backoff time, t\ :sup:`base` is the base
+reconnect backoff time, t\ :sup:`max` is the maximum reconnect backoff time.
+
+The reconnect backoff time will be doubled on disconnect and reconnect
+attempt until it reaches the preconfigured maximum reconnect backoff
+time. After the connection is stable for over the
+``stableConnectionTime``, the reconnect backoff time will be reset to
+the ``baseReconnectQuietTime``.
+
+If no ``configureAutoReconnectBackoffTime`` is called, the following
+default configuration for backoff timing will be performed on initialization:
+
+
+    baseReconnectQuietTimeSecond = 1
+    maxReconnectQuietTimeSecond = 32
+    stableConnectionTimeSecond = 20
+
+***OfflinePublishQueueing***
+
+***DrainingFrequency***
+
+***ConnectDisconnectTimeout***
+
+***MQTTOperationTimeout***
 
      # AWSIoTMQTTClient connection configuration
 	
